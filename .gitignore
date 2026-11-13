@@ -1,0 +1,47 @@
+# Android / Gradle
+.gradle/
+build/
+**/build/
+local.properties
+.externalNativeBuild/
+.cxx/
+
+# IDE
+.idea/
+*.iml
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+secrets/
+**/*secret*
+
+# Local models and binaries
+*.gguf
+*.bin
+*.onnx
+*.tflite
+*.so
+*.aar
+*.apk
+*.aab
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files and backups
+.kotlin/
+*.bak
+backup*/
+build-*.txt
+*-inspection.txt
+
+# Historical source backups
+*.backup*
+*.pre_*
+*.bak_*
+markdown-bubble.txt

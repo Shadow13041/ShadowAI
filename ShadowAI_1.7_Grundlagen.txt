@@ -1,0 +1,136 @@
+===== CHATDATABASE.JAVA =====
+package com.shadowai.app;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+/** Local, private SQLite storage for chats and messages. */
+public final class ChatDatabase extends SQLiteOpenHelper {
+    private static final String DB_NAME = "shadowai.db";
+    private static final int DB_VERSION = 1;
+    public ChatDatabase(Context context) { super(context, DB_NAME, null, DB_VERSION); }
+
+    @Override public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE chats (_id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL)");
+        db.execSQL("CREATE TABLE messages (_id INTEGER PRIMARY KEY AUTOINCREMENT, chat_id INTEGER NOT NULL, role TEXT NOT NULL, content TEXT NOT NULL, created_at INTEGER NOT NULL, FOREIGN KEY(chat_id) REFERENCES chats(_id) ON DELETE CASCADE)");
+        db.execSQL("CREATE INDEX messages_chat_idx ON messages(chat_id, _id)");
+        db.execSQL("PRAGMA foreign_keys=ON");
+    }
+    @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { }
+
+    public long createChat(String title) {
+        long now = System.currentTimeMillis(); ContentValues v = new ContentValues();
+        v.put("title", title == null || title.trim().isEmpty() ? "Neuer Chat" : title.trim());
+        v.put("created_at", now); v.put("updated_at", now);
+        return getWritableDatabase().insertOrThrow("chats", null, v);
+    }
+    public long latestChatId() {
+        try (Cursor c = getReadableDatabase().rawQuery("SELECT _id FROM chats ORDER BY updated_at DESC LIMIT 1", null)) { return c.moveToFirst() ? c.getLong(0) : -1; }
+    }
+    public void ensureChat(long id) { if (id < 0) createChat("Neuer Chat"); }
+    public void addMessage(long chatId, String role, String content) {
+        long now = System.currentTimeMillis(); ContentValues v = new ContentValues(); v.put("chat_id", chatId); v.put("role", role); v.put("content", content); v.put("created_at", now);
+        getWritableDatabase().insertOrThrow("messages", null, v);
+        ContentValues u = new ContentValues(); u.put("updated_at", now);
+        if ("user".equals(role)) u.put("title", content.length() > 42 ? content.substring(0, 42) + "…" : content);
+        getWritableDatabase().update("chats", u, "_id=?", new String[]{String.valueOf(chatId)});
+    }
+    public JSONArray messages(long chatId) {
+        JSONArray out = new JSONArray();
+        try (Cursor c = getReadableDatabase().rawQuery("SELECT role,content FROM messages WHERE chat_id=? ORDER BY _id", new String[]{String.valueOf(chatId)})) {
+            while (c.moveToNext()) out.put(new JSONObject().put("role", c.getString(0)).put("content", c.getString(1)));
+        } catch (Exception ignored) { }
+        return out;
+    }
+    public JSONArray exportAll() {
+        JSONArray chats = new JSONArray();
+        try (Cursor c = getReadableDatabase().rawQuery("SELECT _id,title,created_at FROM chats ORDER BY _id", null)) {
+            while (c.moveToNext()) {
+                JSONObject chat = new JSONObject(); chat.put("id", c.getLong(0)); chat.put("title", c.getString(1)); chat.put("created_at", c.getLong(2));
+                chat.put("messages", messages(c.getLong(0))); chats.put(chat);
+            }
+        } catch (Exception ignored) { }
+        return chats;
+    }
+    public long importChat(String title, JSONArray messages) {
+        long id = createChat(title);
+        for (int i=0; i<messages.length(); i++) {
+            JSONObject m = messages.optJSONObject(i); if (m == null) continue;
+            String role = m.optString("role", "");
+            if (("user".equals(role) || "assistant".equals(role) || "system".equals(role)) && m.has("content")) addMessage(id, role, m.optString("content"));
+        }
+        return id;
+    }
+    public void clearChat(long id) { getWritableDatabase().delete("messages", "chat_id=?", new String[]{String.valueOf(id)}); }
+    public void deleteChat(long id) { getWritableDatabase().delete("chats", "_id=?", new String[]{String.valueOf(id)}); }
+}
+
+===== LOCALINFERENCE.KT =====
+package com.shadowai.app
+
+import dev.ffmpegkit.llama.Llama
+import dev.ffmpegkit.llama.LlamaConfig
+import kotlinx.coroutines.runBlocking
+
+/** On-device llama.cpp runtime. GGUF files are copied into app-private storage. */
+object LocalInference {
+    @Volatile private var engine: Engine? = null
+
+    @Synchronized @JvmStatic fun load(modelPath: String, threads: Int) {
+        release()
+        engine = Engine(modelPath, threads.coerceIn(1, 3))
+    }
+
+    @JvmStatic fun isLoaded(): Boolean = engine != null
+
+    @JvmStatic fun generate(prompt: String, systemPrompt: String, maxTokens: Int): String {
+        val active = engine ?: throw IllegalStateException("Noch kein GGUF-Modell geladen. Bitte zuerst eine Modelldatei importieren.")
+        return active.complete(prompt, systemPrompt, maxTokens.coerceIn(32, 192))
+    }
+
+    @Synchronized @JvmStatic fun release() {
+        engine?.close()
+        engine = null
+    }
+
+    private class Engine(path: String, threads: Int) {
+        private val model = runBlocking {
+            Llama.loadModel(modelPath = path, config = LlamaConfig(contextSize = 2048, threads = threads))
+        }
+        fun complete(prompt: String, system: String, maxTokens: Int): String = runBlocking {
+            Llama.complete(model = model, prompt = prompt.takeLast(5000), systemPrompt = system.take(1000), maxTokens = maxTokens).text
+        }
+        fun close() { runBlocking { Llama.releaseModel(model) } }
+    }
+}
+
+===== APP BUILD.GRADLE =====
+plugins { id 'com.android.application'; id 'org.jetbrains.kotlin.android' }
+
+android {
+    namespace 'com.shadowai.app'
+    compileSdk 34
+    defaultConfig {
+        applicationId 'com.shadowai.app'
+        minSdk 24
+        targetSdk 28
+        versionCode 8
+        versionName '1.6.0'
+        ndk { abiFilters 'arm64-v8a' }
+    }
+    kotlinOptions { jvmTarget = '1.8' }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'dev.ffmpegkit-maintained:llama-android:0.1.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0'
+}

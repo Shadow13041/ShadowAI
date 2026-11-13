@@ -1,0 +1,80 @@
+SHADOWAI 1.7 – PROJEKTANALYSE
+================================
+
+===== 1. PROJEKTDATEIEN =====
+app/src/main/AndroidManifest.xml
+app/src/main/java/com/shadowai/app/AnswerFormatter.java
+app/src/main/java/com/shadowai/app/ChatDatabase.java
+app/src/main/java/com/shadowai/app/LocalInference.kt
+app/src/main/java/com/shadowai/app/MainActivity.java
+app/src/main/res/drawable/ic_shadowai.xml
+app/src/main/res/values/styles.xml
+
+===== 2. JAVA/KOTLIN-KLASSEN UND METHODEN =====
+grep: Unmatched ( or \(
+
+===== 3. DATENBANK =====
+12:public final class ChatDatabase extends SQLiteOpenHelper {
+14:    private static final int DB_VERSION = 1;
+15:    public ChatDatabase(Context context) { super(context, DB_NAME, null, DB_VERSION); }
+17:    @Override public void onCreate(SQLiteDatabase db) {
+18:        db.execSQL("CREATE TABLE chats (_id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL)");
+19:        db.execSQL("CREATE TABLE messages (_id INTEGER PRIMARY KEY AUTOINCREMENT, chat_id INTEGER NOT NULL, role TEXT NOT NULL, content TEXT NOT NULL, created_at INTEGER NOT NULL, FOREIGN KEY(chat_id) REFERENCES chats(_id) ON DELETE CASCADE)");
+20:        db.execSQL("CREATE INDEX messages_chat_idx ON messages(chat_id, _id)");
+23:    @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { }
+25:    public long createChat(String title) {
+31:    public long latestChatId() {
+34:    public void ensureChat(long id) { if (id < 0) createChat("Neuer Chat"); }
+35:    public void addMessage(long chatId, String role, String content) {
+42:    public JSONArray messages(long chatId) {
+49:    public JSONArray exportAll() {
+59:    public long importChat(String title, JSONArray messages) {
+68:    public void clearChat(long id) { getWritableDatabase().delete("messages", "chat_id=?", new String[]{String.valueOf(id)}); }
+69:    public void deleteChat(long id) { getWritableDatabase().delete("chats", "_id=?", new String[]{String.valueOf(id)}); }
+
+===== 4. BUILD-KONFIGURATION =====
+plugins { id 'com.android.application'; id 'org.jetbrains.kotlin.android' }
+
+android {
+    namespace 'com.shadowai.app'
+    compileSdk 34
+    defaultConfig {
+        applicationId 'com.shadowai.app'
+        minSdk 24
+        targetSdk 28
+        versionCode 8
+        versionName '1.6.0'
+        ndk { abiFilters 'arm64-v8a' }
+    }
+    kotlinOptions { jvmTarget = '1.8' }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'dev.ffmpegkit-maintained:llama-android:0.1.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0'
+}
+
+===== 5. MANIFEST =====
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <queries>
+    </queries>
+    <application
+        android:allowBackup="true"
+        android:label="ShadowAI"
+        android:icon="@drawable/ic_shadowai"
+        android:roundIcon="@drawable/ic_shadowai"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".MainActivity" android:exported="true" android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

@@ -1,0 +1,25 @@
+<resources>
+    <style name="AppTheme" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">#45C4FF</item>
+        <item name="android:statusBarColor">#10131A</item>
+        <item name="android:navigationBarColor">#10131A</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:alertDialogTheme">@style/ShadowDialogTheme</item>
+    </style>
+
+    <style name="ShadowDialogTheme" parent="android:style/Theme.Material.Dialog.Alert">
+        <item name="android:colorAccent">#45C4FF</item>
+        <item name="android:windowBackground">#202632</item>
+        <item name="android:textColorPrimary">#F0F3F8</item>
+        <item name="android:textColorSecondary">#A8B2C2</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/ShadowDialogButton</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/ShadowDialogButton</item>
+    </style>
+
+    <style name="ShadowDialogButton" parent="android:style/Widget.Material.Button.Borderless">
+        <item name="android:textColor">#45C4FF</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+</resources>
