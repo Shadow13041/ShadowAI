@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
         maxTokens=prefs.getInt("max_tokens",256);
         if(prefs.getBoolean("theme_light",false)){bgColor=0xFFF2F4F8;panelColor=0xFFFFFFFF;textColor=0xFF171B22;accent=0xFF006DA8;}
         activeChatId=db.latestChatId(); if(activeChatId<0) activeChatId=db.createChat("Neuer Chat");
-        getWindow().setStatusBarColor(bgColor); getWindow().setNavigationBarColor(bgColor);
+        if(android.os.Build.VERSION.SDK_INT>=21){getWindow().setStatusBarColor(bgColor);getWindow().setNavigationBarColor(bgColor);}
         buildMain(); renderHistory();
     }
     private int dp(float v){return (int)(v*getResources().getDisplayMetrics().density+0.5f);}
@@ -636,8 +636,7 @@ exportChat();
             container.setBackgroundColor(Color.TRANSPARENT);
         }
 
-        container.setClipToOutline(true);
-        container.setClipToOutline(true);
+        if(android.os.Build.VERSION.SDK_INT>=21)container.setClipToOutline(true);
 
         String content=AnswerFormatter.clean(text);
 
@@ -2147,6 +2146,6 @@ else if(requestCode==PICK_EXPORT){
         else if(requestCode==PICK_FILE){String mime=getContentResolver().getType(uri);if(mime!=null && mime.startsWith("image/")){pendingImageBase64=readSelectedImage(uri);pendingImageMime="image/jpeg";composer.setText("Analysiere dieses Bild genau. Beschreibe den Inhalt und beantworte erkennbare Fragen.");sendMessage();}else{String content=readSelectedDocument(uri);composer.setText("Analysiere bitte den Inhalt dieser Datei und fasse die wichtigen Informationen zusammen:\n\n"+content);sendMessage();}}
     }catch(Exception e){toast("Datei konnte nicht verarbeitet werden: "+e.getMessage());}}
     private void testConnection(){status.setText("● Prüfe Verbindung …");new Thread(()->{HttpURLConnection c=null;try{String base=endpoint.replaceAll("/v1/chat/completions/?$","");c=openConnectionCompat(new URL(base+"/v1/models"));c.setConnectTimeout(3000);c.setReadTimeout(3000);int code=c.getResponseCode();runOnUiThread(()->{status.setText(code>=200&&code<300?"● Server erreichbar":"● Server: HTTP "+code);toast(code>=200&&code<300?"Server erreichbar":"Server antwortet mit HTTP "+code);});}catch(Exception e){runOnUiThread(()->{status.setText("● Verbindung fehlgeschlagen");toast("Server nicht erreichbar: "+e.getMessage());});}finally{if(c!=null)c.disconnect();}}).start();}
-    private void about(){new AlertDialog.Builder(this).setTitle("Über ShadowAI").setMessage("ShadowAI 1.9.0 – AndroidIDE-Projekt\n\nEnthält optional Gemini 3.6 Flash per eigener API-Key-Eingabe, lokale/eigene OpenAI-kompatible Endpunkte, SQLite-Chatverlauf, Modell-Endpunkt-Einstellungen, Systemprompt, lokale Erinnerungen, Import/Export, Themes und Plugin-Verwaltung.\n\nLokale GGUF-Modelle laufen direkt in der App über llama.cpp. Termux ist für die lokale KI nicht erforderlich. Optionale Terminal-/Python-Zusatzfunktionen sind weiterhin externe Extras und nicht Voraussetzung für Chat oder Modellbetrieb.").setPositiveButton("OK",null).show();}
+    private void about(){new AlertDialog.Builder(this).setTitle("Über ShadowAI").setMessage("ShadowAI 2.0.0 – AndroidIDE-Projekt\n\nEnthält optional Gemini 3.6 Flash per eigener API-Key-Eingabe, lokale/eigene OpenAI-kompatible Endpunkte, SQLite-Chatverlauf, Modell-Endpunkt-Einstellungen, Systemprompt, lokale Erinnerungen, Import/Export, Themes und Plugin-Verwaltung.\n\nLokale GGUF-Modelle laufen direkt in der App über llama.cpp. Termux ist für die lokale KI nicht erforderlich. Optionale Terminal-/Python-Zusatzfunktionen sind weiterhin externe Extras und nicht Voraussetzung für Chat oder Modellbetrieb.").setPositiveButton("OK",null).show();}
     private void toast(String s){Toast.makeText(this,s,Toast.LENGTH_LONG).show();}
 }

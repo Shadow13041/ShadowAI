@@ -4,91 +4,11 @@
     android:viewportWidth="512"
     android:viewportHeight="512">
 
-    <path android:fillColor="#000000"
+    <path
+        android:fillColor="#000000"
         android:pathData="M0,0 H512 V512 H0 Z"/>
 
-    <!-- Antennen, Kopf, Arme, Körper und Beine: äußerer Neon-Schein -->
-    <group>
-        <path android:pathData="M205,111 L184,72 M307,111 L328,72
-            M160,151 C160,123 183,103 212,103 H300 C329,103 352,123 352,151 V190 H160 Z
-            M185,216 C185,202 197,194 213,194 H299 C315,194 327,202 327,216 V345 H185 Z
-            M160,220 C145,220 135,232 135,247 V310
-            M352,220 C367,220 377,232 377,247 V310
-            M217,345 V411 Q217,425 203,425 H193
-            M295,345 V411 Q295,425 309,425 H319"
-            android:fillColor="#00000000"
-            android:strokeColor="#142B50"
-            android:strokeWidth="20"
-            android:strokeLineCap="round"
-            android:strokeLineJoin="round"/>
-    </group>
-
-    <!-- Mittlere blaue Kontur -->
-    <path android:pathData="M205,111 L184,72 M307,111 L328,72
-        M160,151 C160,123 183,103 212,103 H300 C329,103 352,123 352,151 V190 H160 Z
-        M185,216 C185,202 197,194 213,194 H299 C315,194 327,202 327,216 V345 H185 Z
-        M160,220 C145,220 135,232 135,247 V310
-        M352,220 C367,220 377,232 377,247 V310
-        M217,345 V411 Q217,425 203,425 H193
-        M295,345 V411 Q295,425 309,425 H319"
-        android:fillColor="#00000000"
-        android:strokeColor="#087BFF"
-        android:strokeWidth="12"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"/>
-
-    <!-- Helle innere Kontur -->
-    <path android:pathData="M205,111 L184,72 M307,111 L328,72
-        M160,151 C160,123 183,103 212,103 H300 C329,103 352,123 352,151 V190 H160 Z
-        M185,216 C185,202 197,194 213,194 H299 C315,194 327,202 327,216 V345 H185 Z
-        M160,220 C145,220 135,232 135,247 V310
-        M352,220 C367,220 377,232 377,247 V310
-        M217,345 V411 Q217,425 203,425 H193
-        M295,345 V411 Q295,425 309,425 H319"
-        android:fillColor="#00000000"
-        android:strokeColor="#25BFFF"
-        android:strokeWidth="4"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"/>
-
-    <!-- Augen -->
-    <path android:pathData="M215,148 V164 M297,148 V164"
-        android:fillColor="#00000000"
-        android:strokeColor="#25BFFF"
-        android:strokeWidth="9"
-        android:strokeLineCap="round"/>
-
-    <!-- Großes S auf dem Oberkörper -->
-    <path android:pathData="M290,229
-        C276,214 242,214 225,231
-        C203,254 220,275 255,282
-        C292,290 306,308 286,328
-        C270,345 239,344 219,326"
-        android:fillColor="#00000000"
-        android:strokeColor="#142B50"
-        android:strokeWidth="27"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"/>
-
-    <path android:pathData="M290,229
-        C276,214 242,214 225,231
-        C203,254 220,275 255,282
-        C292,290 306,308 286,328
-        C270,345 239,344 219,326"
-        android:fillColor="#00000000"
-        android:strokeColor="#087BFF"
-        android:strokeWidth="17"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"/>
-
-    <path android:pathData="M290,229
-        C276,214 242,214 225,231
-        C203,254 220,275 255,282
-        C292,290 306,308 286,328
-        C270,345 239,344 219,326"
-        android:fillColor="#00000000"
-        android:strokeColor="#25BFFF"
-        android:strokeWidth="5"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round"/>
+    <path
+        android:fillColor="#55CFFF"
+        android:pathData="M256,58 C280,160 352,232 454,256 C352,280 280,352 256,454 C232,352 160,280 58,256 C160,232 232,160 256,58 Z"/>
 </vector>
