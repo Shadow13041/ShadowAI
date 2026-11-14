@@ -80,13 +80,31 @@ public class MainActivity extends Activity {
         buildMain(); renderHistory();
     }
     private int dp(float v){return (int)(v*getResources().getDisplayMetrics().density+0.5f);}
+    private HttpURLConnection openConnectionCompat(URL url) throws Exception {
+        HttpURLConnection connection=(HttpURLConnection)url.openConnection();
+        if(connection instanceof javax.net.ssl.HttpsURLConnection
+                && android.os.Build.VERSION.SDK_INT == 19){
+            javax.net.ssl.SSLContext tls12=javax.net.ssl.SSLContext.getInstance("TLSv1.2");
+            tls12.init(null,null,null);
+            ((javax.net.ssl.HttpsURLConnection)connection).setSSLSocketFactory(tls12.getSocketFactory());
+        }
+        return connection;
+    }
+    private void setTouchBackground(View view,int rippleColor,GradientDrawable normalBackground){
+        if(android.os.Build.VERSION.SDK_INT>=21){
+            view.setBackground(new android.graphics.drawable.RippleDrawable(android.content.res.ColorStateList.valueOf(rippleColor),normalBackground,null));
+        }else{
+            view.setBackground(normalBackground);
+        }
+    }
+
     private GradientDrawable shape(int color,int radius){GradientDrawable d=new GradientDrawable();d.setColor(color);d.setCornerRadius(dp(radius));return d;}
     private TextView label(String text,int size,int color,boolean bold){TextView v=new TextView(this);v.setText(text);v.setTextSize(size);v.setTextColor(color);if(bold)v.setTypeface(Typeface.DEFAULT,Typeface.BOLD);return v;}
     private Button button(String text){Button b=new Button(this);b.setText(text);b.setTextSize(12);b.setTextColor(textColor);b.setAllCaps(false);b.setBackground(shape(panelColor,14));return b;}
     private float drawerTouchStartX=-1,drawerTouchStartY=-1;
     private boolean drawerGestureHandled=false;
 
-    
+
     public boolean dispatchTouchEvent(android.view.MotionEvent event){
         if(event.getAction()==android.view.MotionEvent.ACTION_DOWN){
             drawerTouchStartX=event.getX();
@@ -240,12 +258,12 @@ public class MainActivity extends Activity {
         drawer.setPadding(dp(16),dp(22),dp(12),dp(14));
         drawer.setBackground(shape(bgColor,0));
         LinearLayout.LayoutParams drawerParams=new LinearLayout.LayoutParams(dp(310),-1,Gravity.LEFT);
-        drawer.setElevation(dp(18));
+        if(android.os.Build.VERSION.SDK_INT>=21)drawer.setElevation(dp(18));
         drawer.setTranslationX(-dp(310));
 
         LinearLayout brand=new LinearLayout(this);
         brand.setGravity(Gravity.CENTER_VERTICAL);
-        
+
 ImageView logo=new ImageView(this);
 logo.setImageResource(R.drawable.ic_shadowai);
 logo.setScaleType(ImageView.ScaleType.FIT_CENTER);
@@ -264,7 +282,7 @@ brand.addView(logo,new LinearLayout.LayoutParams(dp(42),dp(42)));
         drawer.addView(brand);
 
         drawerAction("＋","Neuer Chat",()->{closeDrawer();newChat();});
-        
+
 
 EditText drawerSearch=new EditText(this);
 drawerSearch.setSingleLine(true);
@@ -285,9 +303,9 @@ searchParams.topMargin=dp(9);
 drawer.addView(drawerSearch,searchParams);
 
 drawerAction("＋","Projekt erstellen",()->createProjectDialog());
-TextView projectsTitle=label("PROJEKTE",10,0xFF929DAF,true);projectsTitle.setLetterSpacing(0.12f);
+TextView projectsTitle=label("PROJEKTE",10,0xFF929DAF,true);
 projectsTitle.setPadding(dp(8),dp(22),0,dp(10));
-projectsTitle.setLetterSpacing(0.14f);
+
 drawer.addView(projectsTitle);
 JSONArray projects=db.getProjects();
 for(int pi=0;pi<projects.length();pi++){
@@ -301,9 +319,9 @@ for(int pi=0;pi<projects.length();pi++){
 }
 
 
-        TextView recent=label("LETZTE CHATS",10,0xFF929DAF,true);recent.setLetterSpacing(0.12f);
+        TextView recent=label("LETZTE CHATS",10,0xFF929DAF,true);
         recent.setPadding(dp(8),dp(24),0,dp(10));
-        recent.setLetterSpacing(0.14f);
+
         drawer.addView(recent);
 
         ScrollView chatScroll=new ScrollView(this);
@@ -324,9 +342,9 @@ for(int pi=0;pi<projects.length();pi++){
             item.setMinimumHeight(dp(48));
             item.setEllipsize(android.text.TextUtils.TruncateAt.END);
             item.setPadding(dp(14),dp(14),dp(10),dp(14));
-            item.setBackground(new android.graphics.drawable.RippleDrawable(android.content.res.ColorStateList.valueOf(0x2249B9FF),shape(id==activeChatId?panelColor:bgColor,14),null));
+            setTouchBackground(item,0x2249B9FF,shape(id==activeChatId?panelColor:bgColor,14));
             item.setTypeface(android.graphics.Typeface.DEFAULT,pinned?android.graphics.Typeface.BOLD:android.graphics.Typeface.NORMAL);
-            
+
 item.setOnClickListener(v->{activeChatId=id;renderHistory();closeDrawer();});
 item.setOnLongClickListener(v->{showChatActions(id,title,pinned);return true;});
 
@@ -538,7 +556,7 @@ item.setOnLongClickListener(v->{showChatActions(id,title,pinned);return true;});
                 db.setPinned(chatId,!pinned);
                 if(drawerOpen){screen.removeView(drawer);buildDrawer();}
             }else if(which==2){
-                
+
 pendingExportChatId=chatId;
 exportChat();
 
@@ -558,7 +576,7 @@ exportChat();
     }
 
 
-    
+
     private void drawerAction(String symbol,String title,Runnable action){
         LinearLayout item=new LinearLayout(this);
         item.setGravity(Gravity.CENTER_VERTICAL);
@@ -617,7 +635,7 @@ exportChat();
         }else{
             container.setBackgroundColor(Color.TRANSPARENT);
         }
-        container.setElevation(0);
+
         container.setClipToOutline(true);
         container.setClipToOutline(true);
 
@@ -646,12 +664,12 @@ exportChat();
             GradientDrawable codeBackground=shape(0xFF151E2A,13);
             codeBackground.setStroke(dp(1),0xFF29394B);
             card.setBackground(codeBackground);
-            card.setElevation(0);
+
 
             LinearLayout header=new LinearLayout(this);
             header.setGravity(Gravity.CENTER_VERTICAL);
             TextView languageLabel=label(language.isEmpty()?"CODE":language.toUpperCase(java.util.Locale.ROOT),11,0xFF8CCBFF,true);
-            languageLabel.setLetterSpacing(0.08f);
+
             languageLabel.setIncludeFontPadding(false);
             header.addView(languageLabel,new LinearLayout.LayoutParams(0,-2,1));
 
@@ -749,7 +767,7 @@ exportChat();
         box.setPadding(dp(5),dp(38),dp(5),dp(20));
 
         TextView tag=label("DEIN KI-ASSISTENT",11,accent,true);
-        tag.setLetterSpacing(0.14f);
+
         box.addView(tag);
 
         TextView heading=label("Was möchtest du heute machen?",29,textColor,true);
@@ -1349,7 +1367,7 @@ private void showAiStats(){
         if(!taskInstruction.isEmpty())promptBase+="\n\nAUFGABE: "+taskInstruction;
         if("Schnell".equals(thinkingMode))promptBase+=" Antworte direkt und knapp.";
         else if("Gründlich".equals(thinkingMode))promptBase+=" Prüfe deine Antwort sorgfältig und erkläre wichtige Zusammenhänge. Gib keine internen Gedankengänge wieder.";
-        else promptBase+=" Antworte ausgewogen und ohne unnötige Länge."; 
+        else promptBase+=" Antworte ausgewogen und ohne unnötige Länge.";
         final String endpointCopy=endpoint, promptCopy=promptBase, modelCopy=modelName;
         final String providerCopy=provider, apiKeyCopy=prefs.getString("gemini_api_key","").trim();
         final int tokenCopy=maxTokens;final long chatCopy=activeChatId;
@@ -1394,7 +1412,7 @@ private void showAiStats(){
                         try{
                             String encodedQuery=java.net.URLEncoder.encode(text,"UTF-8");
                             URL searchUrl=new URL("https://puri.li/api/search?q="+encodedQuery+"&page=1");
-                            searchConn=(HttpURLConnection)searchUrl.openConnection();
+                            searchConn=openConnectionCompat(searchUrl);
                             searchConn.setConnectTimeout(10000);
                             searchConn.setReadTimeout(20000);
                             searchConn.setRequestMethod("GET");
@@ -1420,7 +1438,7 @@ private void showAiStats(){
                                         HttpURLConnection contextConn=null;
                                         try{
                                             URL contextUrl=new URL("https://puri.li/api/context?url="+java.net.URLEncoder.encode(sourceUrl,"UTF-8"));
-                                            contextConn=(HttpURLConnection)contextUrl.openConnection();
+                                            contextConn=openConnectionCompat(contextUrl);
                                             contextConn.setConnectTimeout(10000);
                                             contextConn.setReadTimeout(20000);
                                             contextConn.setRequestMethod("GET");
@@ -1467,7 +1485,7 @@ private void showAiStats(){
                     int code=0;
                     String responseBody="";
                     for(int attempt=0;attempt<3;attempt++){
-                        c=(HttpURLConnection)new URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent").openConnection();
+                        c=openConnectionCompat(new URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent"));
                         c.setRequestMethod("POST");
                         c.setRequestProperty("x-goog-api-key",apiKeyCopy);
                         c.setConnectTimeout(10000);
@@ -1538,7 +1556,7 @@ private void showAiStats(){
                     if(!memory.isEmpty())requestMessages.put(new JSONObject().put("role","system").put("content","Vom Nutzer gespeicherte Notizen:\n"+memory));
                     for(int i=0;i<h.length();i++){JSONObject m=h.optJSONObject(i);if(m!=null&&("user".equals(m.optString("role"))||"assistant".equals(m.optString("role"))))requestMessages.put(m);}
                     JSONObject payload=new JSONObject().put("model",modelCopy).put("messages",requestMessages).put("temperature",settingTemperature()).put("max_tokens",tokenCopy);
-                    c=(HttpURLConnection)new URL(endpointCopy).openConnection();c.setRequestMethod("POST");c.setConnectTimeout(5000);c.setReadTimeout(180000);c.setDoOutput(true);c.setRequestProperty("Content-Type","application/json; charset=utf-8");
+                    c=openConnectionCompat(new URL(endpointCopy));c.setRequestMethod("POST");c.setConnectTimeout(5000);c.setReadTimeout(180000);c.setDoOutput(true);c.setRequestProperty("Content-Type","application/json; charset=utf-8");
                     try(OutputStream out=c.getOutputStream()){out.write(payload.toString().getBytes(StandardCharsets.UTF_8));}
                     int code=c.getResponseCode();InputStream in=(code>=200&&code<300)?c.getInputStream():c.getErrorStream();StringBuilder sb=new StringBuilder();try(BufferedReader r=new BufferedReader(new InputStreamReader(in,StandardCharsets.UTF_8))){String line;while((line=r.readLine())!=null)sb.append(line);}
                     if(code<200||code>=300)throw new Exception("HTTP "+code+": "+sb);JSONObject result=new JSONObject(sb.toString());answer=result.getJSONArray("choices").getJSONObject(0).getJSONObject("message").optString("content","").trim();
@@ -1636,10 +1654,10 @@ private void showAiStats(){
     }
 
     private void addMenuSection(LinearLayout parent,String title){
-        TextView t=label(title,10,0xFF929DAF,true);t.setLetterSpacing(0.12f);t.setPadding(dp(4),dp(22),dp(4),dp(10));parent.addView(t);
+        TextView t=label(title,10,0xFF929DAF,true);t.setPadding(dp(4),dp(22),dp(4),dp(10));parent.addView(t);
     }
     private void addMenuRow(LinearLayout parent,String symbol,String title,String subtitle,Runnable action){
-        LinearLayout row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);row.setPadding(dp(14),dp(13),dp(14),dp(13));row.setBackground(new android.graphics.drawable.RippleDrawable(android.content.res.ColorStateList.valueOf(0x2249B9FF),shape(panelColor,17),null));
+        LinearLayout row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);row.setPadding(dp(14),dp(13),dp(14),dp(13));setTouchBackground(row,0x2249B9FF,shape(panelColor,17));
         LinearLayout.LayoutParams rp=new LinearLayout.LayoutParams(-1,dp(72));rp.bottomMargin=dp(7);parent.addView(row,rp);
         TextView icon=label(symbol,22,accent,true);icon.setGravity(Gravity.CENTER);icon.setBackground(shape(bgColor,13));icon.setContentDescription(title+" Symbol");row.addView(icon,new LinearLayout.LayoutParams(dp(44),dp(44)));
         LinearLayout words=new LinearLayout(this);words.setOrientation(LinearLayout.VERTICAL);words.setPadding(dp(12),0,dp(4),0);
@@ -2113,7 +2131,7 @@ private void showAiStats(){
             try(InputStream in=getContentResolver().openInputStream(uri);OutputStream out=new java.io.FileOutputStream(dest)){byte[] buf=new byte[1024*1024];int n;while((n=in.read(buf))>0)out.write(buf,0,n);}
             LocalInference.release();prefs.edit().putString("local_model_path",dest.getAbsolutePath()).putString("local_model_name",displayName).apply();toast("Modell importiert: "+displayName+". Wähle jetzt On-Device in den KI-Einstellungen.");
         }
-        
+
 else if(requestCode==PICK_EXPORT){
     JSONArray exportData=pendingExportChatId>=0
         ?db.exportChat(pendingExportChatId):db.exportAll();
@@ -2128,7 +2146,7 @@ else if(requestCode==PICK_EXPORT){
         else if(requestCode==PICK_IMPORT){StringBuilder sb=new StringBuilder();try(InputStream in=getContentResolver().openInputStream(uri);BufferedReader r=new BufferedReader(new InputStreamReader(in,StandardCharsets.UTF_8))){String line;while((line=r.readLine())!=null)sb.append(line).append('\n');}JSONArray arr=new JSONArray(sb.toString());if(arr.length()>0&&arr.optJSONObject(0)!=null&&arr.optJSONObject(0).has("role")){activeChatId=db.importChat("Importierter Chat",arr);}else{for(int i=0;i<arr.length();i++){JSONObject c=arr.optJSONObject(i);if(c==null)continue;JSONArray ms=c.optJSONArray("messages");if(ms!=null)db.importChat(c.optString("title","Importierter Chat"),ms);}}activeChatId=db.latestChatId();renderHistory();toast("Import abgeschlossen");}
         else if(requestCode==PICK_FILE){String mime=getContentResolver().getType(uri);if(mime!=null && mime.startsWith("image/")){pendingImageBase64=readSelectedImage(uri);pendingImageMime="image/jpeg";composer.setText("Analysiere dieses Bild genau. Beschreibe den Inhalt und beantworte erkennbare Fragen.");sendMessage();}else{String content=readSelectedDocument(uri);composer.setText("Analysiere bitte den Inhalt dieser Datei und fasse die wichtigen Informationen zusammen:\n\n"+content);sendMessage();}}
     }catch(Exception e){toast("Datei konnte nicht verarbeitet werden: "+e.getMessage());}}
-    private void testConnection(){status.setText("● Prüfe Verbindung …");new Thread(()->{HttpURLConnection c=null;try{String base=endpoint.replaceAll("/v1/chat/completions/?$","");c=(HttpURLConnection)new URL(base+"/v1/models").openConnection();c.setConnectTimeout(3000);c.setReadTimeout(3000);int code=c.getResponseCode();runOnUiThread(()->{status.setText(code>=200&&code<300?"● Server erreichbar":"● Server: HTTP "+code);toast(code>=200&&code<300?"Server erreichbar":"Server antwortet mit HTTP "+code);});}catch(Exception e){runOnUiThread(()->{status.setText("● Verbindung fehlgeschlagen");toast("Server nicht erreichbar: "+e.getMessage());});}finally{if(c!=null)c.disconnect();}}).start();}
+    private void testConnection(){status.setText("● Prüfe Verbindung …");new Thread(()->{HttpURLConnection c=null;try{String base=endpoint.replaceAll("/v1/chat/completions/?$","");c=openConnectionCompat(new URL(base+"/v1/models"));c.setConnectTimeout(3000);c.setReadTimeout(3000);int code=c.getResponseCode();runOnUiThread(()->{status.setText(code>=200&&code<300?"● Server erreichbar":"● Server: HTTP "+code);toast(code>=200&&code<300?"Server erreichbar":"Server antwortet mit HTTP "+code);});}catch(Exception e){runOnUiThread(()->{status.setText("● Verbindung fehlgeschlagen");toast("Server nicht erreichbar: "+e.getMessage());});}finally{if(c!=null)c.disconnect();}}).start();}
     private void about(){new AlertDialog.Builder(this).setTitle("Über ShadowAI").setMessage("ShadowAI 1.9.0 – AndroidIDE-Projekt\n\nEnthält optional Gemini 3.6 Flash per eigener API-Key-Eingabe, lokale/eigene OpenAI-kompatible Endpunkte, SQLite-Chatverlauf, Modell-Endpunkt-Einstellungen, Systemprompt, lokale Erinnerungen, Import/Export, Themes und Plugin-Verwaltung.\n\nLokale GGUF-Modelle laufen direkt in der App über llama.cpp. Termux ist für die lokale KI nicht erforderlich. Optionale Terminal-/Python-Zusatzfunktionen sind weiterhin externe Extras und nicht Voraussetzung für Chat oder Modellbetrieb.").setPositiveButton("OK",null).show();}
     private void toast(String s){Toast.makeText(this,s,Toast.LENGTH_LONG).show();}
 }
