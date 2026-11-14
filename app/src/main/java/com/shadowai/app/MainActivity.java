@@ -67,6 +67,10 @@ public class MainActivity extends Activity {
         prefs=getSharedPreferences(PREFS,MODE_PRIVATE); db=new ChatDatabase(this);
         endpoint=prefs.getString("endpoint",DEFAULT_ENDPOINT);
         provider=prefs.getString("provider","local");
+        if (BuildConfig.FLAVOR.equals("universal") && "device".equals(provider)) {
+            provider="local";
+            prefs.edit().putString("provider","local").apply();
+        }
         modelName=prefs.getString("model_name","Qwen3 lokal");
         systemPrompt=prefs.getString("system_prompt","Du bist ShadowAI, eine hilfreiche lokale KI. Antworte auf Deutsch, ehrlich und präzise. Nutze Werkzeuge nur nach den dafür vorgesehenen Prüfungen.");
         maxTokens=prefs.getInt("max_tokens",256);
@@ -1778,9 +1782,12 @@ private void showAiStats(){
 
         content.addView(label("KI-ANBIETER & API",12,accent,true));
         Spinner providerSpinner=new Spinner(this);
-        String[] providers={"Eigene OpenAI-kompatible API","Google Gemini API","On-Device (GGUF)"};
+        boolean localInferenceAvailable = !BuildConfig.FLAVOR.equals("universal");
+        String[] providers = localInferenceAvailable
+            ? new String[]{"Eigene OpenAI-kompatible API","Google Gemini API","On-Device (GGUF)"}
+            : new String[]{"Eigene OpenAI-kompatible API","Google Gemini API"};
         providerSpinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,providers));
-        providerSpinner.setSelection("gemini".equals(provider)?1:("device".equals(provider)?2:0));
+        providerSpinner.setSelection("gemini".equals(provider)?1:("device".equals(provider)&&localInferenceAvailable?2:0));
         content.addView(providerSpinner);
 
         EditText apiKey=field(prefs.getString("gemini_api_key",""),"Gemini API-Schlüssel",false);
@@ -1877,8 +1884,9 @@ private void showAiStats(){
                     return;
                 }
 
-                String newProvider=providerSpinner.getSelectedItemPosition()==1?"gemini":
-                    (providerSpinner.getSelectedItemPosition()==2?"device":"local");
+                int selectedProvider = providerSpinner.getSelectedItemPosition();
+                String newProvider = selectedProvider == 1 ? "gemini"
+                    : (selectedProvider == 2 && localInferenceAvailable ? "device" : "local");
                 if("local".equals(newProvider)&&
                    !endpointValue.startsWith("http://")&&!endpointValue.startsWith("https://")){
                     toast("Der API-Endpunkt muss mit http:// oder https:// beginnen.");
