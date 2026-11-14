@@ -1467,8 +1467,9 @@ private void showAiStats(){
                     int code=0;
                     String responseBody="";
                     for(int attempt=0;attempt<3;attempt++){
-                        c=(HttpURLConnection)new URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key="+apiKeyCopy).openConnection();
+                        c=(HttpURLConnection)new URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent").openConnection();
                         c.setRequestMethod("POST");
+                        c.setRequestProperty("x-goog-api-key",apiKeyCopy);
                         c.setConnectTimeout(10000);
                         c.setReadTimeout(180000);
                         c.setDoOutput(true);
@@ -1574,9 +1575,11 @@ private void showAiStats(){
         addMenuSection(content,"KI & MODELLE");
         addMenuRow(content,"🧠","Gedächtnis verwalten","Profil und gespeicherte Erinnerungen",()->{dialog.dismiss();manageMemory();});
         addMenuRow(content,"⚙","Einstellungen","API, Eingabe, Design und KI-Persönlichkeit",()->{dialog.dismiss();showSettings();});
+        if(!BuildConfig.FLAVOR.equals("universal")){
         addMenuRow(content,"▦","Modelle verwalten","Modelle, Speicher und RAM",()->{dialog.dismiss();manageModels();});
         addMenuRow(content,"▤","Modellprofile","Gespeicherte API-Profile",()->{dialog.dismiss();modelManager();});
         addMenuRow(content,"⬇","GGUF-Modell importieren",prefs.getString("local_model_name","Noch kein Modell ausgewählt"),()->{dialog.dismiss();pickLocalModel();});
+        }
         addMenuSection(content,"EINGABE");
         addMenuSection(content,"ANPASSUNG & FUNKTIONEN");
         addMenuRow(content,"▤","Erinnerungen","Eigene Notizen für die KI",()->{dialog.dismiss();editMemory();});
