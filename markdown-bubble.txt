@@ -1,0 +1,53 @@
+package com.shadowai.app;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.content.Context;
+import android.widget.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
+
+public class MainActivity extends Activity {
+    private static final String PREFS="shadowai_settings";
+    private static final int PICK_EXPORT=701, PICK_IMPORT=702, PICK_FILE=703, PICK_MODEL=704;
+    private static final String DEFAULT_ENDPOINT="http://127.0.0.1:8080/v1/chat/completions";
+    private SharedPreferences prefs;
+    private ChatDatabase db;
+=== BUBBLE ===
+    private void bubble(String text,boolean user){bubble(text,user,-1);}
+    private void bubble(String text,boolean user,long messageId){
+        TextView t=label(text,15,textColor,false);
+        t.setTextIsSelectable(true);
+        t.setLineSpacing(dp(2),1f);
+        t.setPadding(dp(14),dp(11),dp(14),dp(11));
+        t.setBackground(shape(user?(prefs.getBoolean("theme_light",false)?0xFFD5EFFF:0xFF075C91):panelColor,18));
+        LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-2,-2);
+        p.width=Math.min(getResources().getDisplayMetrics().widthPixels-dp(66),dp(340));
+        p.gravity=user?Gravity.RIGHT:Gravity.LEFT;
+        p.setMargins(dp(2),dp(5),dp(2),dp(5));
+        messages.addView(t,p);
+        if(messageId>0)t.setOnLongClickListener(v->{messageActions(messageId,text,user);return true;});
+        down();
+    }
+    private void down(){if(scroll!=null)scroll.post(()->scroll.fullScroll(View.FOCUS_DOWN));}
+    private void renderHistory(){

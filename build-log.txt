@@ -1,0 +1,338 @@
+
+> Configure project :app
+WARNING: The option setting 'android.aapt2FromMavenOverride=/usr/bin/aapt2' is experimental.
+
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:compileDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+
+> Task :app:compileDebugJavaWithJavac FAILED
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:209: error: illegal character: '\'
+        addMenuRow(content,"?","Chatverlauf","Fr?here Unterhaltungen ?ffnen",()->{dialog.dismiss();chooseChat();});\n        addMenuRow(content,"?","Chats suchen","Chatnamen und Nachrichten durchsuchen",()->{dialog.dismiss();searchChats();});\n        addMenuRow(content,"?","Chats verwalten","Umbenennen, anheften oder l?schen",()->{dialog.dismiss();manageChats();});
+                                                                                                                   ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:209: error: ';' expected
+        addMenuRow(content,"?","Chatverlauf","Fr?here Unterhaltungen ?ffnen",()->{dialog.dismiss();chooseChat();});\n        addMenuRow(content,"?","Chats suchen","Chatnamen und Nachrichten durchsuchen",()->{dialog.dismiss();searchChats();});\n        addMenuRow(content,"?","Chats verwalten","Umbenennen, anheften oder l?schen",()->{dialog.dismiss();manageChats();});
+                                                                                                                                       ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:209: error: not a statement
+        addMenuRow(content,"?","Chatverlauf","Fr?here Unterhaltungen ?ffnen",()->{dialog.dismiss();chooseChat();});\n        addMenuRow(content,"?","Chats suchen","Chatnamen und Nachrichten durchsuchen",()->{dialog.dismiss();searchChats();});\n        addMenuRow(content,"?","Chats verwalten","Umbenennen, anheften oder l?schen",()->{dialog.dismiss();manageChats();});
+                                                                                                                                        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:209: error: ';' expected
+        addMenuRow(content,"?","Chatverlauf","Fr?here Unterhaltungen ?ffnen",()->{dialog.dismiss();chooseChat();});\n        addMenuRow(content,"?","Chats suchen","Chatnamen und Nachrichten durchsuchen",()->{dialog.dismiss();searchChats();});\n        addMenuRow(content,"?","Chats verwalten","Umbenennen, anheften oder l?schen",()->{dialog.dismiss();manageChats();});
+                                                                                                                                               ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:209: error: illegal start of expression
+        addMenuRow(content,"?","Chatverlauf","Fr?here Unterhaltungen ?ffnen",()->{dialog.dismiss();chooseChat();});\n        addMenuRow(content,"?","Chats suchen","Chatnamen und Nachrichten durchsuchen",()->{dialog.dismiss();searchChats();});\n        addMenuRow(content,"?","Chats verwalten","Umbenennen, anheften oder l?schen",()->{dialog.dismiss();manageChats();});
+                                                                                                                                                                                                                                                ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:209: error: illegal character: '\'
+        addMenuRow(content,"?","Chatverlauf","Fr?here Unterhaltungen ?ffnen",()->{dialog.dismiss();chooseChat();});\n        addMenuRow(content,"?","Chats suchen","Chatnamen und Nachrichten durchsuchen",()->{dialog.dismiss();searchChats();});\n        addMenuRow(content,"?","Chats verwalten","Umbenennen, anheften oder l?schen",()->{dialog.dismiss();manageChats();});
+                                                                                                                                                                                                                                                  ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:209: error: <identifier> expected
+        addMenuRow(content,"?","Chatverlauf","Fr?here Unterhaltungen ?ffnen",()->{dialog.dismiss();chooseChat();});\n        addMenuRow(content,"?","Chats suchen","Chatnamen und Nachrichten durchsuchen",()->{dialog.dismiss();searchChats();});\n        addMenuRow(content,"?","Chats verwalten","Umbenennen, anheften oder l?schen",()->{dialog.dismiss();manageChats();});
+                                                                                                                                                                                                                                                                              ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:209: error: illegal start of type
+        addMenuRow(content,"?","Chatverlauf","Fr?here Unterhaltungen ?ffnen",()->{dialog.dismiss();chooseChat();});\n        addMenuRow(content,"?","Chats suchen","Chatnamen und Nachrichten durchsuchen",()->{dialog.dismiss();searchChats();});\n        addMenuRow(content,"?","Chats verwalten","Umbenennen, anheften oder l?schen",()->{dialog.dismiss();manageChats();});
+                                                                                                                                                                                                                                                                               ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:209: error: illegal start of type
+        addMenuRow(content,"?","Chatverlauf","Fr?here Unterhaltungen ?ffnen",()->{dialog.dismiss();chooseChat();});\n        addMenuRow(content,"?","Chats suchen","Chatnamen und Nachrichten durchsuchen",()->{dialog.dismiss();searchChats();});\n        addMenuRow(content,"?","Chats verwalten","Umbenennen, anheften oder l?schen",()->{dialog.dismiss();manageChats();});
+                                                                                                                                                                                                                                                                                                                                                                              ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:210: error: invalid method declaration; return type required
+        addMenuSection(content,"KI & MODELLE");
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:210: error: <identifier> expected
+        addMenuSection(content,"KI & MODELLE");
+                              ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:210: error: illegal start of type
+        addMenuSection(content,"KI & MODELLE");
+                               ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:211: error: invalid method declaration; return type required
+        addMenuRow(content,"?","KI-Anbieter & API","Gemini oder eigene Modell-API konfigurieren",()->{dialog.dismiss();modelSettings();});
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:211: error: <identifier> expected
+        addMenuRow(content,"?","KI-Anbieter & API","Gemini oder eigene Modell-API konfigurieren",()->{dialog.dismiss();modelSettings();});
+                          ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:211: error: illegal start of type
+        addMenuRow(content,"?","KI-Anbieter & API","Gemini oder eigene Modell-API konfigurieren",()->{dialog.dismiss();modelSettings();});
+                           ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:211: error: illegal start of type
+        addMenuRow(content,"?","KI-Anbieter & API","Gemini oder eigene Modell-API konfigurieren",()->{dialog.dismiss();modelSettings();});
+                                                                                                                                        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:212: error: invalid method declaration; return type required
+        addMenuRow(content,"?","Modelle verwalten","Gespeicherte Modellprofile",()->{dialog.dismiss();modelManager();});
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:212: error: <identifier> expected
+        addMenuRow(content,"?","Modelle verwalten","Gespeicherte Modellprofile",()->{dialog.dismiss();modelManager();});
+                          ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:212: error: illegal start of type
+        addMenuRow(content,"?","Modelle verwalten","Gespeicherte Modellprofile",()->{dialog.dismiss();modelManager();});
+                           ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:212: error: illegal start of type
+        addMenuRow(content,"?","Modelle verwalten","Gespeicherte Modellprofile",()->{dialog.dismiss();modelManager();});
+                                                                                                                      ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:213: error: invalid method declaration; return type required
+        addMenuRow(content,"?","GGUF-Modell importieren",prefs.getString("local_model_name","Noch kein Modell ausgew?hlt"),()->{dialog.dismiss();pickLocalModel();});
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:213: error: <identifier> expected
+        addMenuRow(content,"?","GGUF-Modell importieren",prefs.getString("local_model_name","Noch kein Modell ausgew?hlt"),()->{dialog.dismiss();pickLocalModel();});
+                          ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:213: error: illegal start of type
+        addMenuRow(content,"?","GGUF-Modell importieren",prefs.getString("local_model_name","Noch kein Modell ausgew?hlt"),()->{dialog.dismiss();pickLocalModel();});
+                           ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:213: error: illegal start of type
+        addMenuRow(content,"?","GGUF-Modell importieren",prefs.getString("local_model_name","Noch kein Modell ausgew?hlt"),()->{dialog.dismiss();pickLocalModel();});
+                                                                                                                                                                   ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:214: error: invalid method declaration; return type required
+        addMenuSection(content,"ANPASSUNG & FUNKTIONEN");
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:214: error: <identifier> expected
+        addMenuSection(content,"ANPASSUNG & FUNKTIONEN");
+                              ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:214: error: illegal start of type
+        addMenuSection(content,"ANPASSUNG & FUNKTIONEN");
+                               ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:215: error: invalid method declaration; return type required
+        addMenuRow(content,"?","Plugins","Verf?gbare Werkzeuge aktivieren",()->{dialog.dismiss();pluginManager();});
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:215: error: <identifier> expected
+        addMenuRow(content,"?","Plugins","Verf?gbare Werkzeuge aktivieren",()->{dialog.dismiss();pluginManager();});
+                          ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:215: error: illegal start of type
+        addMenuRow(content,"?","Plugins","Verf?gbare Werkzeuge aktivieren",()->{dialog.dismiss();pluginManager();});
+                           ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:215: error: illegal start of type
+        addMenuRow(content,"?","Plugins","Verf?gbare Werkzeuge aktivieren",()->{dialog.dismiss();pluginManager();});
+                                                                                                                  ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:216: error: invalid method declaration; return type required
+        addMenuRow(content,"?","Werkzeuge","Terminal, Dateien, Web und weitere Tools",()->{dialog.dismiss();toolMenu();});
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:216: error: <identifier> expected
+        addMenuRow(content,"?","Werkzeuge","Terminal, Dateien, Web und weitere Tools",()->{dialog.dismiss();toolMenu();});
+                          ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:216: error: illegal start of type
+        addMenuRow(content,"?","Werkzeuge","Terminal, Dateien, Web und weitere Tools",()->{dialog.dismiss();toolMenu();});
+                           ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:216: error: illegal start of type
+        addMenuRow(content,"?","Werkzeuge","Terminal, Dateien, Web und weitere Tools",()->{dialog.dismiss();toolMenu();});
+                                                                                                                        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:217: error: invalid method declaration; return type required
+        addMenuRow(content,"?","Erinnerungen","Eigene Notizen f?r die KI",()->{dialog.dismiss();editMemory();});
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:217: error: <identifier> expected
+        addMenuRow(content,"?","Erinnerungen","Eigene Notizen f?r die KI",()->{dialog.dismiss();editMemory();});
+                          ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:217: error: illegal start of type
+        addMenuRow(content,"?","Erinnerungen","Eigene Notizen f?r die KI",()->{dialog.dismiss();editMemory();});
+                           ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:217: error: illegal start of type
+        addMenuRow(content,"?","Erinnerungen","Eigene Notizen f?r die KI",()->{dialog.dismiss();editMemory();});
+                                                                                                              ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:218: error: invalid method declaration; return type required
+        addMenuRow(content,"?","Systemprompt","Verhalten von ShadowAI anpassen",()->{dialog.dismiss();editPrompt();});
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:218: error: <identifier> expected
+        addMenuRow(content,"?","Systemprompt","Verhalten von ShadowAI anpassen",()->{dialog.dismiss();editPrompt();});
+                          ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:218: error: illegal start of type
+        addMenuRow(content,"?","Systemprompt","Verhalten von ShadowAI anpassen",()->{dialog.dismiss();editPrompt();});
+                           ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:218: error: illegal start of type
+        addMenuRow(content,"?","Systemprompt","Verhalten von ShadowAI anpassen",()->{dialog.dismiss();editPrompt();});
+                                                                                                                    ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:219: error: invalid method declaration; return type required
+        addMenuRow(content,"?","Darstellung","Helles oder dunkles Design",()->{dialog.dismiss();chooseTheme();});
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:219: error: <identifier> expected
+        addMenuRow(content,"?","Darstellung","Helles oder dunkles Design",()->{dialog.dismiss();chooseTheme();});
+                          ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:219: error: illegal start of type
+        addMenuRow(content,"?","Darstellung","Helles oder dunkles Design",()->{dialog.dismiss();chooseTheme();});
+                           ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:219: error: illegal start of type
+        addMenuRow(content,"?","Darstellung","Helles oder dunkles Design",()->{dialog.dismiss();chooseTheme();});
+                                                                                                               ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:220: error: invalid method declaration; return type required
+        addMenuSection(content,"DATEN & APP");
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:220: error: <identifier> expected
+        addMenuSection(content,"DATEN & APP");
+                              ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:220: error: illegal start of type
+        addMenuSection(content,"DATEN & APP");
+                               ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:221: error: invalid method declaration; return type required
+        addMenuRow(content,"?","Chats exportieren","Unterhaltungen als JSON sichern",()->{dialog.dismiss();exportChat();});
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:221: error: <identifier> expected
+        addMenuRow(content,"?","Chats exportieren","Unterhaltungen als JSON sichern",()->{dialog.dismiss();exportChat();});
+                          ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:221: error: illegal start of type
+        addMenuRow(content,"?","Chats exportieren","Unterhaltungen als JSON sichern",()->{dialog.dismiss();exportChat();});
+                           ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:221: error: illegal start of type
+        addMenuRow(content,"?","Chats exportieren","Unterhaltungen als JSON sichern",()->{dialog.dismiss();exportChat();});
+                                                                                                                         ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:222: error: invalid method declaration; return type required
+        addMenuRow(content,"?","Chats importieren","Vorhandene Sicherung ?bernehmen",()->{dialog.dismiss();importChat();});
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:222: error: <identifier> expected
+        addMenuRow(content,"?","Chats importieren","Vorhandene Sicherung ?bernehmen",()->{dialog.dismiss();importChat();});
+                          ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:222: error: illegal start of type
+        addMenuRow(content,"?","Chats importieren","Vorhandene Sicherung ?bernehmen",()->{dialog.dismiss();importChat();});
+                           ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:222: error: illegal start of type
+        addMenuRow(content,"?","Chats importieren","Vorhandene Sicherung ?bernehmen",()->{dialog.dismiss();importChat();});
+                                                                                                                         ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:223: error: invalid method declaration; return type required
+        addMenuRow(content,"?","Aktuellen Chat leeren","Nachrichten dieser Unterhaltung l?schen",()->{dialog.dismiss();clearChat();});
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:223: error: <identifier> expected
+        addMenuRow(content,"?","Aktuellen Chat leeren","Nachrichten dieser Unterhaltung l?schen",()->{dialog.dismiss();clearChat();});
+                          ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:223: error: illegal start of type
+        addMenuRow(content,"?","Aktuellen Chat leeren","Nachrichten dieser Unterhaltung l?schen",()->{dialog.dismiss();clearChat();});
+                           ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:223: error: illegal start of type
+        addMenuRow(content,"?","Aktuellen Chat leeren","Nachrichten dieser Unterhaltung l?schen",()->{dialog.dismiss();clearChat();});
+                                                                                                                                    ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:224: error: invalid method declaration; return type required
+        addMenuRow(content,"?","Verbindung testen","Erreichbarkeit des Modellservers pr?fen",()->{dialog.dismiss();testConnection();});
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:224: error: <identifier> expected
+        addMenuRow(content,"?","Verbindung testen","Erreichbarkeit des Modellservers pr?fen",()->{dialog.dismiss();testConnection();});
+                          ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:224: error: illegal start of type
+        addMenuRow(content,"?","Verbindung testen","Erreichbarkeit des Modellservers pr?fen",()->{dialog.dismiss();testConnection();});
+                           ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:224: error: illegal start of type
+        addMenuRow(content,"?","Verbindung testen","Erreichbarkeit des Modellservers pr?fen",()->{dialog.dismiss();testConnection();});
+                                                                                                                                     ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:225: error: invalid method declaration; return type required
+        addMenuRow(content,"?","?ber ShadowAI","Versions- und Projektinformationen",()->{dialog.dismiss();about();});
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:225: error: <identifier> expected
+        addMenuRow(content,"?","?ber ShadowAI","Versions- und Projektinformationen",()->{dialog.dismiss();about();});
+                          ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:225: error: illegal start of type
+        addMenuRow(content,"?","?ber ShadowAI","Versions- und Projektinformationen",()->{dialog.dismiss();about();});
+                           ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:225: error: illegal start of type
+        addMenuRow(content,"?","?ber ShadowAI","Versions- und Projektinformationen",()->{dialog.dismiss();about();});
+                                                                                                                   ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:226: error: <identifier> expected
+        scrollMenu.addView(content);page.addView(scrollMenu,new LinearLayout.LayoutParams(-1,0,1));
+                          ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:226: error: <identifier> expected
+        scrollMenu.addView(content);page.addView(scrollMenu,new LinearLayout.LayoutParams(-1,0,1));
+                                  ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:226: error: <identifier> expected
+        scrollMenu.addView(content);page.addView(scrollMenu,new LinearLayout.LayoutParams(-1,0,1));
+                                                ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:226: error: <identifier> expected
+        scrollMenu.addView(content);page.addView(scrollMenu,new LinearLayout.LayoutParams(-1,0,1));
+                                                           ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:226: error: illegal start of type
+        scrollMenu.addView(content);page.addView(scrollMenu,new LinearLayout.LayoutParams(-1,0,1));
+                                                            ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:227: error: <identifier> expected
+        dialog.setContentView(page);dialog.setCancelable(true);dialog.show();
+                             ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:227: error: <identifier> expected
+        dialog.setContentView(page);dialog.setCancelable(true);dialog.show();
+                                  ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:227: error: <identifier> expected
+        dialog.setContentView(page);dialog.setCancelable(true);dialog.show();
+                                                        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:227: error: illegal start of type
+        dialog.setContentView(page);dialog.setCancelable(true);dialog.show();
+                                                         ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:227: error: <identifier> expected
+        dialog.setContentView(page);dialog.setCancelable(true);dialog.show();
+                                                                          ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:228: error: illegal start of type
+        if(dialog.getWindow()!=null){dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);dialog.getWindow().setLayout(-1,-1);}
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:228: error: <identifier> expected
+        if(dialog.getWindow()!=null){dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);dialog.getWindow().setLayout(-1,-1);}
+                           ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:228: error: ';' expected
+        if(dialog.getWindow()!=null){dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);dialog.getWindow().setLayout(-1,-1);}
+                             ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:230: error: class, interface, or enum expected
+    private void addMenuSection(LinearLayout parent,String title){
+            ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:231: error: class, interface, or enum expected
+        TextView t=label(title,10,0xFF929DAF,true);t.setLetterSpacing(0.12f);t.setPadding(dp(3),dp(18),dp(3),dp(8));parent.addView(t);
+                                                   ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:231: error: class, interface, or enum expected
+        TextView t=label(title,10,0xFF929DAF,true);t.setLetterSpacing(0.12f);t.setPadding(dp(3),dp(18),dp(3),dp(8));parent.addView(t);
+                                                                             ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:231: error: class, interface, or enum expected
+        TextView t=label(title,10,0xFF929DAF,true);t.setLetterSpacing(0.12f);t.setPadding(dp(3),dp(18),dp(3),dp(8));parent.addView(t);
+                                                                                                                    ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:232: error: class, interface, or enum expected
+    }
+    ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:234: error: class, interface, or enum expected
+        LinearLayout row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);row.setPadding(dp(12),dp(10),dp(12),dp(10));row.setBackground(shape(panelColor,17));
+                                                ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:234: error: class, interface, or enum expected
+        LinearLayout row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);row.setPadding(dp(12),dp(10),dp(12),dp(10));row.setBackground(shape(panelColor,17));
+                                                                                        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:234: error: class, interface, or enum expected
+        LinearLayout row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);row.setPadding(dp(12),dp(10),dp(12),dp(10));row.setBackground(shape(panelColor,17));
+                                                                                                                                    ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:235: error: class, interface, or enum expected
+        LinearLayout.LayoutParams rp=new LinearLayout.LayoutParams(-1,dp(68));rp.bottomMargin=dp(8);parent.addView(row,rp);
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:235: error: class, interface, or enum expected
+        LinearLayout.LayoutParams rp=new LinearLayout.LayoutParams(-1,dp(68));rp.bottomMargin=dp(8);parent.addView(row,rp);
+                                                                              ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:235: error: class, interface, or enum expected
+        LinearLayout.LayoutParams rp=new LinearLayout.LayoutParams(-1,dp(68));rp.bottomMargin=dp(8);parent.addView(row,rp);
+                                                                                                    ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:236: error: class, interface, or enum expected
+        TextView icon=label(symbol,22,accent,true);icon.setGravity(Gravity.CENTER);icon.setBackground(shape(bgColor,13));row.addView(icon,new LinearLayout.LayoutParams(dp(44),dp(44)));
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:236: error: class, interface, or enum expected
+        TextView icon=label(symbol,22,accent,true);icon.setGravity(Gravity.CENTER);icon.setBackground(shape(bgColor,13));row.addView(icon,new LinearLayout.LayoutParams(dp(44),dp(44)));
+                                                   ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:236: error: class, interface, or enum expected
+        TextView icon=label(symbol,22,accent,true);icon.setGravity(Gravity.CENTER);icon.setBackground(shape(bgColor,13));row.addView(icon,new LinearLayout.LayoutParams(dp(44),dp(44)));
+                                                                                   ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:236: error: class, interface, or enum expected
+        TextView icon=label(symbol,22,accent,true);icon.setGravity(Gravity.CENTER);icon.setBackground(shape(bgColor,13));row.addView(icon,new LinearLayout.LayoutParams(dp(44),dp(44)));
+                                                                                                                         ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:237: error: class, interface, or enum expected
+        LinearLayout words=new LinearLayout(this);words.setOrientation(LinearLayout.VERTICAL);words.setPadding(dp(12),0,dp(4),0);
+        ^
+/storage/internal_new/project/ShadowAI_v1.5/ShadowAI_AndroidIDE/app/src/main/java/com/shadowai/app/MainActivity.java:237: error: class, interface, or enum expected
+        LinearLayout words=new LinearLayout(this);words.setOrientation(LinearLayout.VERTICAL);words.setPadding(dp(12),0,dp(4),0);
+                                                  ^
+100 errors
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDebugJavaWithJavac'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+> Run with --info option to get more log output.
+> Run with --scan to get full insights.
+
+BUILD FAILED in 13s
+16 actionable tasks: 1 executed, 15 up-to-date
